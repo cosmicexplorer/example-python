@@ -20,5 +20,6 @@ python_requirements(
   # it can correctly infer dependencies.
   module_mapping={
     "setuptools": ["pkg_resources"],
+    "ansicolors": ["colors"],
   },
 )

@@ -7,7 +7,7 @@ from helloworld.config import load_config
 from helloworld.greet.greeting import Greeter
 
 
-def say_hello() -> None:
+def main() -> None:
     config = load_config()
     greeter = Greeter(languages=config.languages, greetings=config.greetings)
     sentence = greeter.greet("world")
@@ -15,4 +15,4 @@ def say_hello() -> None:
 
 
 if __name__ == "__main__":
-    say_hello()
+    main()
