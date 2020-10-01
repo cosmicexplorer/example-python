@@ -7,12 +7,18 @@ from helloworld.config import load_config
 from helloworld.greet.greeting import Greeter
 
 
-def main() -> None:
+def say_hello() -> None:
     config = load_config()
     greeter = Greeter(languages=config.languages, greetings=config.greetings)
     sentence = greeter.greet("world")
     print(green(sentence))
 
 
+def handler(event, context):
+    config = load_config()
+    greeter = Greeter(languages=config.languages, greetings=config.greetings)
+    print(greeter.greet("world"))
+
+
 if __name__ == "__main__":
-    main()
+    say_hello()

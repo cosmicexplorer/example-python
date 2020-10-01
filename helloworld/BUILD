@@ -1,18 +1,24 @@
 # Copyright 2020 Pants project contributors.
 # Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-python_binary(
-    # name defaults to the name of this directory, i.e., `helloworld`.
+python_library(
+    name='multi-deployable-main',
     sources=["main.py"],
-    entry_point="helloworld.main",
+    # Dependencies inferred from main.py.
 )
 
-# Note: Has sdist dependencies, so must be built on Linux.
-python_awslambda(
+python_binary(
+    # name defaults to the name of this directory, i.e., `helloworld`.
+    entry_point="helloworld.main",
+    dependencies=[':multi-deployable-main'],
+)
+
+python_binary(
     name="helloworld-awslambda",
-    sources=["awslambda.py"],
-    handler="helloworld.awslambda:handler",
-    runtime="python3.7",
+    entry_point="helloworld.awslambda:handler",
+    dependencies=[':multi-deployable-main'],
+    # Note: Has sdist dependencies, so must be built on Linux.
+    platforms=['linux_x86_64-cp-37-m'],
 )
 
 python_binary(

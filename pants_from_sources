@@ -26,7 +26,7 @@ plugins=(
 )
 
 function string_list() {
-  eval local -r list_variable="\${$1[@]}"
+  eval local -r list_variable="\${$1[@]:-}"
 
   echo -n "["
   for item in ${list_variable}; do
